@@ -1,5 +1,3 @@
-console.log("Extension loaded")
-
 function skip(button) {
     if (button.getAttribute("aria-hidden") === "false") {
         setTimeout(() => {

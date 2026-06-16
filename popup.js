@@ -1,5 +1,3 @@
-console.log("popup loaded");
-
 chrome.storage.sync.get(["skipRecap"], (result) =>{
     recap.checked = result.skipRecap;
 });
