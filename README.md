@@ -1,4 +1,4 @@
-Crunchy Skip
+Crunchy Auto-Skip
 
 A Chrome extension that automatically skips intros, recaps, and credits on Crunchyroll.
 
