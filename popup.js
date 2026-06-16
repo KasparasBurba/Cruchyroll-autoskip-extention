@@ -1,3 +1,7 @@
+const recap = document.getElementById("recap");
+const intro = document.getElementById("intro");
+const credits = document.getElementById("credits");
+
 chrome.storage.sync.get(["skipRecap"], (result) =>{
     recap.checked = result.skipRecap;
 });
@@ -10,21 +14,18 @@ chrome.storage.sync.get(["skipCredits"], (result) =>{
     credits.checked = result.skipCredits;
 });
 
-const recap = document.getElementById("recap");
 recap.addEventListener("change", () => {
     chrome.storage.sync.set({
         skipRecap: recap.checked
     });
 });
 
-const intro = document.getElementById("intro");
 intro.addEventListener("change", () => {
     chrome.storage.sync.set({
         skipIntro: intro.checked
     });
 });
 
-const credits = document.getElementById("credits");
 credits.addEventListener("change", () => {
     chrome.storage.sync.set({
         skipCredits: credits.checked
