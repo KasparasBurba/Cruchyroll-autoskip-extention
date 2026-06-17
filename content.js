@@ -6,34 +6,25 @@ function skip(button) {
     }
 }
 
+const settingMap = {
+    "Skip Recap": "skipRecap",
+    "Skip Intro": "skipIntro",
+    "Skip Credits": "skipCredits"
+}
+
 const interval = setInterval(() => {
     const button = document.querySelector('[aria-label="Skip Recap"], [aria-label="Skip Intro"], [aria-label="Skip Credits"]');
 
     if (button) {
         const label = button.getAttribute("aria-label")
+        const settingName = settingMap[label]
 
-        if (label === "Skip Recap") {
-            chrome.storage.sync.get(["skipRecap"], (result) => {
-                if (result.skipRecap) {
-                    skip(button)
-                }
-            })
-        }
-    
-        else if (label === "Skip Intro") {
-            chrome.storage.sync.get(["skipIntro"], (result) => {
-                if (result.skipIntro) {
-                    skip(button)
-                }
-            })
-        }
-    
-        else if (label === "Skip Credits") {
-            chrome.storage.sync.get(["skipCredits"], (result) => {
-                if (result.skipCredits) {
+        if (settingName) {
+            chrome.storage.sync.get([settingName], (result) => {
+                if (result[settingName]) {
                     skip(button)
                 }
             })
         }
     }
-}, 1000)
+}, 150)
