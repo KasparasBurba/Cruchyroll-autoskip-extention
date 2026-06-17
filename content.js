@@ -54,12 +54,28 @@ const observer = new MutationObserver(() => {
     }
 })
 
-const finder = setInterval (() => {
-    button = document.querySelector(skipButtonSelector)
+function startFinder() {
+    const finder = setInterval(() => {
+        button = document.querySelector(skipButtonSelector)
 
-    if(button) {
-        clearInterval(finder)
-        observeCurrentButton(button)
-        checkForSkipButton()
+        if (button) {
+            clearInterval(finder)
+            observeCurrentButton(button)
+            checkForSkipButton()
+        }
+    }, 30)
+}
+
+let currentUrl = location.href
+
+setInterval(() => {
+    if (location.href !== currentUrl) {
+        currentUrl = location.href
+
+        observer.disconnect()
+        button = null
+        startFinder()
     }
-}, 30)
+}, 1000)
+
+startFinder()
