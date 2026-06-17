@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Crunchy Skip",
-    "version": "1.0",
+    "version": "1.1",
     "description": "Recap, intro and credits auto-skip on Crunchyroll",
 
     "permissions": ["storage"],

@@ -21,4 +21,4 @@ Open a Crunchyroll episode.
 Recaps, intros and credits will be skipped automatically.
 
 Version
-1.0
+1.1
