@@ -1,14 +1,23 @@
 let button
 
+const skipButtonSelector = '[aria-label="Skip Recap"], [aria-label="Skip Intro"], [aria-label="Skip Credits"]'
+
 const settingMap = {
     "Skip Recap": "skipRecap",
     "Skip Intro": "skipIntro",
     "Skip Credits": "skipCredits"
 }
 
-function skip(button) {
-    button = document.querySelector('[aria-label="Skip Recap"], [aria-label="Skip Intro"], [aria-label="Skip Credits"]')
+function observeCurrentButton(button) {
+    observer.disconnect()
 
+    observer.observe(button, {
+        attributes: true,
+        attributeFilter: ["aria-hidden"]
+    })
+}
+
+function skip(button) {
     if (button.getAttribute("aria-hidden") === "false") {
         setTimeout(() => {
             button.click()
@@ -20,10 +29,12 @@ function skip(button) {
     }
 }
 
-function checkForSkipButton(button) {
-    button = document.querySelector('[aria-label="Skip Recap"], [aria-label="Skip Intro"], [aria-label="Skip Credits"]')
+function checkForSkipButton() {
+    button = document.querySelector(skipButtonSelector)
 
     if (button) {
+        observeCurrentButton(button)
+
         const label = button.getAttribute("aria-label")
         const settingName = settingMap[label]
 
@@ -44,14 +55,11 @@ const observer = new MutationObserver(() => {
 })
 
 const finder = setInterval (() => {
-    button = document.querySelector('[aria-label="Skip Recap"], [aria-label="Skip Intro"], [aria-label="Skip Credits"]')
+    button = document.querySelector(skipButtonSelector)
 
     if(button) {
         clearInterval(finder)
-
-        observer.observe(button, {
-            attributes: true,
-            attributeFilter: ["aria-hidden"]
-        })
+        observeCurrentButton(button)
+        checkForSkipButton()
     }
 }, 30)
